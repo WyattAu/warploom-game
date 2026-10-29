@@ -1,0 +1,57 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {"major": 3, "minor": 28, "patch": 0},
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default (Release)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/default",
+      "cacheVariables": {"CMAKE_BUILD_TYPE": "Release"}
+    },
+    {
+      "name": "headless-debug",
+      "displayName": "Headless Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/headless-debug",
+      "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug"}
+    },
+    {
+      "name": "headless-debug-clang",
+      "displayName": "Headless Debug (Clang)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/headless-debug-clang",
+      "cacheVariables": {"CMAKE_BUILD_TYPE": "Debug"},
+      "environment": {"CC": "clang", "CXX": "clang++"}
+    },
+    {
+      "name": "headless-release",
+      "displayName": "Headless Release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/headless-release",
+      "cacheVariables": {"CMAKE_BUILD_TYPE": "Release"}
+    },
+    {
+      "name": "tsan",
+      "displayName": "ThreadSanitizer",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/tsan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS": "-fsanitize=thread -fno-omit-frame-pointer",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=thread"
+      }
+    },
+    {
+      "name": "asan-ubsan",
+      "displayName": "AddressSanitizer + UBSanitizer",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/asan-ubsan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined -fno-omit-frame-pointer",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The estate-shared C++ gate matrix. This repo has no Vulkan sources, no
+  # socket harness and no docs script, so those legs stay off; the examples
+  # leg builds the default preset and is pointed at the drop binary.
+  gates:
+    name: "C++ gates (shared matrix)"
+    uses: WyattAu/engineering-standards/.github/workflows/cpp-kit.yml@main
+    with:
+      tier: full
+      format_paths: "src"
+      enable_vulkan_validation: false
+      enable_live_proof: false
+      enable_docs: false
+      examples_assert_command: "test -x build/default/bin/drop"
+      examples_artifact_name: "drop"
+      examples_artifact_path: "build/default/bin/drop"
