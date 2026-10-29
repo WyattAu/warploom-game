@@ -23,6 +23,7 @@ jobs:
       enable_vulkan_validation: false
       enable_live_proof: false
       enable_docs: false
+      enable_benchmark: false
       examples_assert_command: "test -x build/default/bin/drop"
       examples_artifact_name: "drop"
       examples_artifact_path: "build/default/bin/drop"
